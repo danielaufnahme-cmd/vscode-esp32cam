@@ -1,0 +1,40 @@
+{
+  "name": "esp32cam",
+  "displayName": "ESP32 Camera Dev",
+  "description": "Live ESP32-S3 camera preview next to the editor, plus Run/Upload/Stop for MicroPython over USB.",
+  "version": "0.2.0",
+  "publisher": "local",
+  "license": "MIT",
+  "engines": { "vscode": "^1.80.0" },
+  "categories": ["Other"],
+  "main": "./extension.js",
+  "activationEvents": ["workspaceContains:tools/usb_bridge.py"],
+  "contributes": {
+    "commands": [
+      { "command": "esp32cam.run", "title": "Run on ESP32", "category": "ESP32", "icon": "$(play)" },
+      { "command": "esp32cam.upload", "title": "Upload to ESP32", "category": "ESP32", "icon": "$(cloud-upload)" },
+      { "command": "esp32cam.stop", "title": "Stop script on ESP32", "category": "ESP32", "icon": "$(debug-stop)" },
+      { "command": "esp32cam.repl", "title": "Open MicroPython REPL", "category": "ESP32", "icon": "$(terminal)" },
+      { "command": "esp32cam.reset", "title": "Reset board", "category": "ESP32" },
+      { "command": "esp32cam.listFiles", "title": "List files on board", "category": "ESP32" },
+      { "command": "esp32cam.showCamera", "title": "Show camera", "category": "ESP32", "icon": "$(device-camera)" },
+      { "command": "esp32cam.showDevices", "title": "Show devices", "category": "ESP32", "icon": "$(circuit-board)" },
+      { "command": "esp32cam.startCamera", "title": "Start camera preview", "category": "ESP32" },
+      { "command": "esp32cam.stopCamera", "title": "Stop camera preview", "category": "ESP32" },
+      { "command": "esp32cam.snapshot", "title": "Save camera snapshot", "category": "ESP32" }
+    ],
+    "menus": {
+      "editor/title": [
+        { "command": "esp32cam.run", "when": "esp32cam.enabled && resourceLangId == python", "group": "navigation@1" },
+        { "command": "esp32cam.stop", "when": "esp32cam.enabled && resourceLangId == python", "group": "navigation@2" },
+        { "command": "esp32cam.upload", "when": "esp32cam.enabled && resourceLangId == python", "group": "navigation@3" },
+        { "command": "esp32cam.showCamera", "when": "esp32cam.enabled", "group": "navigation@4" },
+        { "command": "esp32cam.showDevices", "when": "esp32cam.enabled", "group": "navigation@5" }
+      ]
+    },
+    "keybindings": [
+      { "command": "esp32cam.run", "key": "f5", "when": "esp32cam.enabled && editorLangId == python" },
+      { "command": "esp32cam.stop", "key": "shift+f5", "when": "esp32cam.enabled" }
+    ]
+  }
+}
